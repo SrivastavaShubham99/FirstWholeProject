@@ -1,7 +1,9 @@
 package com.example.myapplication.ui.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,8 @@ import com.example.myapplication.network.ApiResponse
 import com.example.myapplication.ui.main.adapters.UserListAdapter
 import com.example.myapplication.viewmodel.MyViewmodel
 import org.koin.android.ext.android.bind
+import android.os.Handler
+import android.os.Message
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -33,12 +37,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         buildUI()
     }
     private fun obViewModel(){
+
         myViewmodel.getUsers()
     }
    private fun buildUI(){
        myViewmodel.userLiveData.observe(this,mObserver)
        binding.recycler.adapter=userListAdapter
+       binding.progressBarCyclic.visibility= View.VISIBLE
        binding.recycler.layoutManager=LinearLayoutManager(this)
+
+
    }
 
     private fun handleRequest(user: ApiResponse<ResponseUserList>){
@@ -48,9 +56,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             ApiResponse.Status.SUCCESS ->{
                 Log.d("TAG","VALUE : ${userList}")
+                binding.progressBarCyclic.visibility= View.GONE
                 userListAdapter.addUserList((user.data?.data as List<ResponseUserList.Data>?)!!)
             }
             ApiResponse.Status.ERROR ->{
+                binding.progressBarCyclic.visibility= View.GONE
                 Toast.makeText(this,"Super Bug",Toast.LENGTH_SHORT).show()
             }
         }

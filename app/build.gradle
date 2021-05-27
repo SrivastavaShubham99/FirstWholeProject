@@ -107,4 +107,9 @@ dependencies {
 
     //Circular Image dependency
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+
+    //constraints layout
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0-beta02'
+
 }
