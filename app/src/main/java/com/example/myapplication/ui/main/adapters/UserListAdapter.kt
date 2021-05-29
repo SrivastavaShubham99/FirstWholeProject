@@ -31,7 +31,7 @@ class UserListAdapter(val userList:MutableList<ResponseUserList.Data>?): Recycle
     }
 
     override fun onBindViewHolder(holder: RowHolder, position: Int) {
-        holder.bind(userList!!.get(position))
+        holder.bind(userList!![position])
     }
 
     inner class RowHolder(val binding: UserlistBinding) :RecyclerView.ViewHolder(binding.root){

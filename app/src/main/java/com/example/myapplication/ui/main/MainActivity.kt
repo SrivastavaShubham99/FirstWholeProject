@@ -2,6 +2,7 @@ package com.example.myapplication.ui.main
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.example.myapplication.viewmodel.MyViewmodel
 import org.koin.android.ext.android.bind
 import android.os.Handler
 import android.os.Message
+import com.example.myapplication.ui.main.Home.ResourceActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -35,10 +37,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onViewInitialized() {
         obViewModel()
         buildUI()
+        listerners()
     }
     private fun obViewModel(){
-
         myViewmodel.getUsers()
+    }
+
+    private fun listerners(){
+        binding.btn.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+               var intent= Intent(applicationContext,ResourceActivity::class.java)
+                startActivity(intent)
+            }
+
+        })
     }
    private fun buildUI(){
        myViewmodel.userLiveData.observe(this,mObserver)
