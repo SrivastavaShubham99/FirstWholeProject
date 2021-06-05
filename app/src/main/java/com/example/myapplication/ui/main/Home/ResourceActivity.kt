@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.main.Home
 
+import android.content.Intent
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,6 +34,7 @@ class ResourceActivity : BaseActivity<ActivityResourceBinding>() {
     override fun onViewInitialized() {
         obViewModel()
         buildUI()
+        onClickListeners()
     }
 
     private fun obViewModel(){
@@ -45,6 +47,14 @@ class ResourceActivity : BaseActivity<ActivityResourceBinding>() {
         binding.resourceRecyler.adapter=resourceAdapter
         binding.resourceProgress.visibility=View.VISIBLE
         binding.resourceRecyler.layoutManager=LinearLayoutManager(this)
+    }
+
+    private fun onClickListeners(){
+        binding.btnClick.setOnClickListener{
+            var intent=Intent(this,BasicsFunctionality::class.java).let {
+                startActivity(it)
+            }
+        }
     }
 
     private fun handleResourceResponse(resourceList:ApiResponse<ResourceListResponse>){

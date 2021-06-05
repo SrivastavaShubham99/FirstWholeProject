@@ -115,4 +115,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0-beta02'
 
+    //viewpager and tablayout
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
 }
